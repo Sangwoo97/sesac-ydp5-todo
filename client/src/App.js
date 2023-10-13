@@ -1,26 +1,20 @@
 import './App.css';
 import AddTodo from './components/AddTodo';
 import Todo from './components/Todo';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
-  const [todoItems, setTodoItems] = useState([
-    {
-      id: 1,
-      title: 'my todo1',
-      done: false,
-    },
-    {
-      id: 2,
-      title: 'my todo2',
-      done: false,
-    },
-    {
-      id: 3,
-      title: 'my todo3',
-      done: true,
-    },
-  ]);
+  const [todoItems, setTodoItems] = useState([]);
+
+  useEffect(() => {
+    const getTodo = async () => {
+      const result = await axios.get(`${process.env.REACT_APP_DB_HOST}/todo`);
+      setTodoItems(result.data);
+    };
+
+    getTodo();
+  }, []);
 
   const addItem = (newItem) => {
     newItem.id = todoItems.length + 1;
