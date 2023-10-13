@@ -35,9 +35,24 @@ export default function Todo({ items, deleteItem, updateItem }) {
   };
 
   return (
-    <div>
-      <input type='checkbox' name={`todo${id}`} id={`todo${id}`} checked={done} onChange={checkboxEventListener} />
+    <div
+      style={{
+        display: 'flex',
+        width: '100%',
+        margin: '12px 0',
+        alignItems: 'center',
+      }}
+    >
       <input
+        className='boxCheck'
+        type='checkbox'
+        name={`todo${id}`}
+        id={`todo${id}`}
+        checked={done}
+        onChange={checkboxEventListener}
+      />
+      <input
+        className='boxContent'
         type='text'
         readOnly={readOnly}
         onClick={() => setReadOnly(false)}

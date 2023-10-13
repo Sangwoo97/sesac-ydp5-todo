@@ -2,12 +2,14 @@ import './App.css';
 import AddTodo from './components/AddTodo';
 import Todo from './components/Todo';
 import React, { useState, useEffect } from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 
 function App() {
   const [todoItems, setTodoItems] = useState([]);
 
   useEffect(() => {
+    document.body.classList.add('cBody');
     const getTodo = async () => {
       const result = await axios.get(`${process.env.REACT_APP_DB_HOST}/todo`);
       setTodoItems(result.data);
@@ -42,11 +44,14 @@ function App() {
 
   return (
     <div className='App'>
-      <AddTodo addItem={addItem} />
-      {todoItems.length}
-      {todoItems.map((e, i) => {
-        return <Todo items={e} key={e.id} deleteItem={deleteItem} updateItem={updateItem} />;
-      })}
+      <header>TODO APP</header>
+      <div className='todoContainer'>
+        <AddTodo addItem={addItem} />
+        <div className='count'> 💪 총 개수 : {todoItems.length}</div>
+        {todoItems.map((e, i) => {
+          return <Todo items={e} key={e.id} deleteItem={deleteItem} updateItem={updateItem} />;
+        })}
+      </div>
     </div>
   );
 }

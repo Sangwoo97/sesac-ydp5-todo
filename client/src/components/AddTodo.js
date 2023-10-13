@@ -10,6 +10,7 @@ export default function AddTodo({ addItem }) {
   return (
     <div className='AddTodo'>
       <input
+        className='addInput'
         type='text'
         placeholder='Add your new todo'
         value={todoItem.title}
