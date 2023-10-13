@@ -20,8 +20,8 @@ exports.createTodo = async (req, res) => {
       done: false,
     });
     console.log(newTodo);
-    // res.send(newTodo);
-    res.end();
+    res.send(newTodo);
+    // res.end();
   } catch (err) {
     res.send(err);
   }
